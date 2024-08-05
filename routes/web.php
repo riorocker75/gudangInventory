@@ -15,8 +15,6 @@ use Illuminate\Support\Facades\Route;
 
 // controller admin route
 use App\Http\Controllers\AdminCtrl;
-use App\Http\Controllers\PasienCtrl;
-use App\Http\Controllers\KapusCtrl;
 use App\Http\Controllers\LoginCtrl;
 use App\Http\Controllers\TesCtrl;
 
@@ -37,7 +35,45 @@ Route::get('/logout', [LoginCtrl::class,'logout']);
 
 
 
+//barang
+Route::get('/dashboard/barang/data', [AdminCtrl::class,'barang']);
+Route::get('/dashboard/barang/add', [AdminCtrl::class,'barang_add']);
+Route::post('/dashboard/barang/act', [AdminCtrl::class,'barang_act']);
 
+Route::get('/dashboard/barang/edit/{id}', [AdminCtrl::class,'barang_edit']);
+Route::post('/dashboard/barang/update', [AdminCtrl::class,'barang_update']);
+Route::get('/dashboard/barang/delete/{id}', [AdminCtrl::class,'barang_delete']);
+
+Route::post('/dashboard/barang/import_excel', [AdminCtrl::class,'barang_import_excell']);
+
+//barang masuk
+Route::get('/dashboard/barang_masuk/data', [AdminCtrl::class,'barang_masuk']);
+Route::get('/dashboard/barang_masuk/add', [AdminCtrl::class,'barang_masuk_add']);
+Route::post('/dashboard/barang_masuk/act', [AdminCtrl::class,'barang_masuk_act']);
+
+Route::get('/dashboard/barang_masuk/edit/{id}', [AdminCtrl::class,'barang_masuk_edit']);
+Route::post('/dashboard/barang_masuk/update', [AdminCtrl::class,'barang_masuk_update']);
+Route::get('/dashboard/barang_masuk/delete/{id}', [AdminCtrl::class,'barang_masuk_delete']);
+
+// barang keluar
+Route::get('/dashboard/barang_keluar/data', [AdminCtrl::class,'barang_keluar']);
+Route::get('/dashboard/barang_keluar/add', [AdminCtrl::class,'barang_keluar_add']);
+Route::post('/dashboard/barang_keluar/act', [AdminCtrl::class,'barang_keluar_act']);
+
+Route::get('/dashboard/barang_keluar/edit/{id}', [AdminCtrl::class,'barang_keluar_edit']);
+Route::post('/dashboard/barang_keluar/update', [AdminCtrl::class,'barang_keluar_update']);
+Route::get('/dashboard/barang_keluar/delete/{id}', [AdminCtrl::class,'barang_keluar_delete']);
+
+// lokasi barang
+Route::get('/dashboard/lokasi/data', [AdminCtrl::class,'lokasi']);
+Route::post('/dashboard/lokasi/act', [AdminCtrl::class,'lokasi_act']);
+Route::get('/dashboard/lokasi/edit/{id}', [AdminCtrl::class,'lokasi_edit']);
+Route::post('/dashboard/lokasi/update', [AdminCtrl::class,'lokasi_update']);
+Route::get('/dashboard/lokasi/delete/{id}', [AdminCtrl::class,'lokasi_delete']);
+
+
+// cek ajax barang
+Route::post('/ajax/kode-masuk',[AdminCtrl::class,'ajax_kode']);
 
 // daftar pasien
 Route::get('/daftar/pasien', [AdminCtrl::class,'pasien']);

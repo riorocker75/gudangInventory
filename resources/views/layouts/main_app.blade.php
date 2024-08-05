@@ -124,11 +124,13 @@
 <script>
   $(function () {
 
-     $('.select2').select2()
-    //Initialize Select2 Elements
-    $('.select2bs4').select2({
-      theme: 'bootstrap4'
-    })
+    $('.select2').select2()
+
+//Initialize Select2 Elements
+$('.select2bs4').select2({
+  theme: 'bootstrap4'
+})
+
 
     $("#table1").DataTable({
       "responsive": true, "lengthChange": false, "autoWidth": false,

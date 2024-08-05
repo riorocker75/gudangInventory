@@ -18,11 +18,12 @@ return new class extends Migration
                 $table->text('code')->nullable();
                 $table->text('beli')->nullable();
                 $table->text('jual')->nullable();
+              $table->text('jumlah')->nullable();
+              $table->text('lokasi')->nullable();
                $table->text('barcode')->nullable();
-              // $table->text('jumlah')->nullable();
-               $table->text('lokasi')->nullable();
-               $table->date('tgl');
-               $table->text('status')->comment('1=aktif, 0=non');
+               $table->text('satuan')->nullable();
+               $table->date('tgl')->nullable();
+               $table->text('status')->nullable();
             });
         };
     }

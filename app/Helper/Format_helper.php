@@ -12,13 +12,17 @@ function format_tanggal($tanggal){
         'Agustus',
         'September',
         'Oktober',
-        'November',
+        'November', 
         'Desember'
     );
     $pecahkan = explode('-', $tanggal);
     return $pecahkan[2] . ' ' . $bulan[ (int)$pecahkan[1] ] . ' ' . $pecahkan[0];
 }
 
+function rupiah_format($angka){
+    $hasil = 'Rp. ' . number_format($angka, 2, ",", ".");
+    return $hasil;
+}
 function format_notif_jam($timestamp){  
     $time_ago = strtotime($timestamp);  
     $current_time = time();  

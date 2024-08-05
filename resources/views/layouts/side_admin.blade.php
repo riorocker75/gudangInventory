@@ -97,15 +97,21 @@
                 </a>
               </li>
                <li class="nav-item">
-                <a href="{{url('/dashboard/barang/masuk/data')}}" class="nav-link">
+                <a href="{{url('/dashboard/barang_masuk/data')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Data Barang Masuk</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="{{url('/dashboard/barang/keluar/data')}}" class="nav-link">
+                <a href="{{url('/dashboard/barang_keluar/data')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Data Barang Keluar</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{url('/dashboard/lokasi/data')}}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Data Lokasi</p>
                 </a>
               </li>
               

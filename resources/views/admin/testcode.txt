@@ -1,0 +1,6 @@
+
+
+
+<td>Tanggal Masuk: {{format_tanggal(date('Y-m-d',strtotime($dt->tanggal)))}}
+<br>Tanggal Keluar:  {{format_tanggal(date('Y-m-d',strtotime($dt->tanggal_keluar)))}}
+</td>
