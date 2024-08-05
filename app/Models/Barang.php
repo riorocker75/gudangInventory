@@ -17,5 +17,8 @@ class Barang extends Model
        'jual',
        'jumlah',
        'lokasi',
+       'barcode',
+       'tgl',
+       'status',
     ];
 }

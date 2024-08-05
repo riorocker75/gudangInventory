@@ -42,47 +42,86 @@
                     <tr>
                       <th>No</th>
                       <th>Nama </th>
-                      <th>Jumlah</th>
-                      <th>Harga Beli</th>
-                      <th>Harga Jual</th>
+                      <th>Item Code </th>
+                      <th>Stock</th>
+                      <th>Harga</th>
                       <th>Lokasi</th>
                       <th>Barcode</th>
                       <th>Edit</th>
                     </tr>
                     </thead>
                     <tbody>
+                      @foreach ($data as $dt)
                        
                         <?php $no=1; ?>
-                        @foreach ($data as $dt)
   
                           @php
-                              // $pasien=App\Models\Pasien::where('id',$dt->id_pasien)->first();
                               $lokasi=App\Models\Lokasi::where('nama',$dt->lokasi)->first();
 
                           @endphp
   
                              <tr>
                                   <td>{{$no++}}</td>
-                                    <td>{{$dt->nama}}</td>
-                                    <td>{{$dt->jumlah}}</td>
-
-                                    <td>Rp.{{number_format($dt->beli)}}</td>
-                                    <td>Rp.{{number_format($dt->jual)}}</td>
+                                  <td>{{$dt->nama}}</td>
+                                  <td>{{$dt->code}}</td>
+                                  <td>{{$dt->jumlah}}</td>
+                                    <td>
+                                      Beli :<span class="badge badge-default">{{rupiah_format($dt->beli)}} </span><br>
+                                      Jual: <span class="badge badge-success">{{rupiah_format($dt->jual)}} </span>
+                                    </td>
                                     <td>{{$lokasi->nama}}</td>
-                                    <td> {!!DNS1D::getBarcodeHTML($dt->barcode, 'C39')!!}</td>
+                                    <td> 
+                                     
+                                      <button type="button" class="btn btn-default mr-5" data-toggle="modal" data-target="#cetakBarcode-{{$dt->id}}">
+                                        <i class="fa fa-print" aria-hidden="true"> Print Barcode</i> 
+                                       </button>
+                                    </td>
                                      <td>
+                                      <a href="{{url('/dashboard/barang/detail/'.$dt->id.'')}}" class="btn btn-sm btn-default">Detail</a>
                                         <a href="{{url('/dashboard/barang/edit/'.$dt->id.'')}}" class="btn btn-sm btn-warning">Ubah</a>
                                         <a href="{{url('/dashboard/barang/delete/'.$dt->id.'')}}" class="btn btn-sm btn-danger">Hapus</a>
                                     </td>
                               </tr>
-                        @endforeach
+
+
+                               {{-- modal cetak barcode --}}
+                <div class="modal fade" id="cetakBarcode-{{$dt->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal-dialog" role="document">
+                    <form method="post" action="{{url('/dashboard/barang_detail/cetak_barcode_item')}}" enctype="multipart/form-data">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="exampleModalLabel">Cetak</h5>
+                        </div>
+                        <div class="modal-body">
+                
+                          {{ csrf_field() }}
+                
+                          <label>Masukan Jumlah Barcode yang ingin dicetak</label>
+                          <div class="form-group">
+                              <input type="hidden" class="form-control" name="id" value="{{$dt->id}}" required>
+              
+                              <input type="number" class="form-control" name="cetak" value="1" required>
+                          </div>
+                
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                          <button type="submit" class="btn btn-primary">cetak</button>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                </div>
                    
+                       @endforeach
                    
                     </tbody>
                 
                   </table>
                 </div>
                 <!-- /.card-body -->
+
+               
         </section>   
 
 

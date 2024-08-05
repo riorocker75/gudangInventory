@@ -125,6 +125,13 @@ public function barang_import_excell(Request $request) {
                 'data' =>$data
             ]);
         }
+        
+        function barang_detail($id){
+            $data = Barang::where('id',$id)->get();
+            return view('admin.barang_detail',[
+                'data' =>$data
+            ]);
+        }
 
         function barang_update(Request $request){
             $request->validate([
@@ -220,7 +227,7 @@ public function barang_import_excell(Request $request) {
             'code' => 'required',
             'jumlah' => 'required',
          ]);
-         $barang= Barang::where('code',$request->code)->first();
+         $barang= Barang::where('barcode',$request->code)->first();
          $barang_id=$barang->id;
 
          $total=$request->jumlah + $barang->jumlah;
@@ -255,7 +262,7 @@ public function barang_import_excell(Request $request) {
             'jumlah' => 'required',
          ]);
          $id=$request->id;
-         $barang= Barang::where('code',$request->code)->first();
+         $barang= Barang::where('barcode',$request->code)->first();
          $barang_id=$barang->id;
 
          $trs=Transaksi::where('id',$id)->first();
@@ -287,7 +294,7 @@ public function barang_import_excell(Request $request) {
     // ajax barang masuk dari kode
     function ajax_kode(Request $request){
         $kode=$request->kode;
-        $dbr = Barang::where('code',$kode)->first();
+        $dbr = Barang::where('barcode',$kode)->first();
         $nama=$dbr->nama;
         $harga_beli=rupiah_format($dbr->beli);
         $harga_jual=rupiah_format($dbr->jual);
@@ -330,7 +337,7 @@ public function barang_import_excell(Request $request) {
             'code' => 'required',
             'jumlah' => 'required',
          ]);
-         $barang= Barang::where('code',$request->code)->first();
+         $barang= Barang::where('barcode',$request->code)->first();
          $barang_id=$barang->id;
 
          $total=$barang->jumlah - $request->jumlah;
@@ -365,7 +372,7 @@ public function barang_import_excell(Request $request) {
             'jumlah' => 'required',
          ]);
          $id=$request->id;
-         $barang= Barang::where('code',$request->code)->first();
+         $barang= Barang::where('barcode',$request->code)->first();
          $barang_id=$barang->id;
 
          $trs=Transaksi::where('id',$id)->first();
@@ -395,264 +402,31 @@ public function barang_import_excell(Request $request) {
     }
 
 
-    // pasien
-    function pasien(){
-        return view('pasien.pasien');
-    }
-
-    function pasien_act(Request $request){
-         $request->validate([
-            'nama' => 'required',
-            'nik' => 'required'
-        ]);
-
-         $date=date('Y-m-d');
-
-         DB::table('pasien')->insert([
-            'nama' => $request->nama,
-            'nik' =>$request->nik,
-            'kartu_berobat'=> $request->kartu,
-            'tanggal_lahir'=> $request->tgl_lhr,
-            'tempat_lahir' => $request->tmp_lhr,
-            'agama'=> $request->agama,
-            'pekerjaan'=> $request->kerja,
-            'alamat'=> $request->alamat,
-            'nama_kepala'=> $request->kepala,
-            'tgl_registrasi' => $date,
-            'status' => 1
-        ]);
-
-        return redirect('/dashboard/pasien/data')->with('alert-success','Data diri anda sudah terkirim');
-
-    }
-
-     function pasien_data(){
-         $data = Pasien::orderBy('id','desc')->get();
-        return view('admin.pasien_data',[
-            'data' =>$data
-        ]);
-    }
-    function pasien_edit($id){
-          $data = Pasien::where('id',$id)->get();
-        return view('admin.pasien_edit',[
-            'data' =>$data
-        ]);
-    }
-
-    function pasien_update(){
-        
-    }
-    function pasien_delete(){
-               Pasien::where('id',$id)->delete();
-        return redirect('/dashboard/pasien/data')->with('alert-success','Data Berhasil');  
-    }
-
+   
     
 
+// cetak barcode
 
-    // pegawai
+function cetak_barcode_peritem(Request $request){
+    $jumlah=$request->cetak;
+    $id=$request->id;
+    $barang=Barang::where('id',$id)->first();
+    $barcode=$barang->barcode;
+    $data=array();
 
-    function pegawai(){
-        $data=Pegawai::orderBy('id','desc')->get();
-        return view('admin.pegawai_data',[
-            'data' =>$data
-        ]);
-
+    for($i=0;$i<$jumlah;$i++){
+       $data[]= $barcode; 
     }
 
-    function pegawai_add(){
-        return view('admin.pegawai_add');
-    }
-
-    function pegawai_act(Request $request){
-            $request->validate([
-                'nama' => 'required',
-                'nip' => 'required'
-            ]);
-
-             $date=date('Y-m-d');
-
-         DB::table('pegawai')->insert([
-            'nama' => $request->nama,
-            'nip' =>$request->nip,
-            'jenis_kelamin' => $request->kelamin,
-            'tanggal_lahir' => $request->tgl_lhr,
-            'tempat_lahir' => $request->tmp_lhr,
-            'alamat' => $request->alamat,
-            'telepon' => $request->no_hp,
-            'jabatan' => $request->jabatan,
-            'pendidikan_nama' => $request->pendidikan,
-            'pendidikan_tahun_lulus' => $request->thn_lulus,
-            'pendidikan_tk_ijazah' => $request->pt_ijazah,
-            // 'pangkat' => $request->pangkat,
-            'tmt_cpns' => $request->cpns,
-            'tanggal' => date('Y-m-d'),
-
-            'status' => 1
-        ]);
-
-        return redirect('/dashboard/pegawai/data')->with('alert-success','Data diri anda sudah terkirim');
-
-
-    }
-
-    function pegawai_edit($id){
-        $data=Pegawai::where('id',$id)->get();
-        return view('admin.pegawai_edit',[
-            'data' => $data
-        ]);
-    }
-    function pegawai_update(Request $request){
-          $request->validate([
-                'nama' => 'required',
-                'nip' => 'required'
-            ]);
-            $id=$request->id;
-
-             $date=date('Y-m-d');
-
-         DB::table('pegawai')->where('id',$id)->update([
-            'nama' => $request->nama,
-            'nip' =>$request->nip,
-            'jenis_kelamin' => $request->kelamin,
-            'tanggal_lahir' => $request->tgl_lhr,
-            'tempat_lahir' => $request->tmp_lhr,
-            'alamat' => $request->alamat,
-            'telepon' => $request->no_hp,
-            'jabatan' => $request->jabatan,
-            'pendidikan_nama' => $request->pendidikan,
-            'pendidikan_tahun_lulus' => $request->thn_lulus,
-            'pendidikan_tk_ijazah' => $request->pt_ijazah,
-            // 'pangkat' => $request->pangkat,
-            'tmt_cpns' => $request->cpns,
-            'status' => 1
-        ]);
-
-        return redirect('/dashboard/pegawai/data')->with('alert-success','Data diri anda sudah terkirim');
-
-    }
-
-    function pegawai_delete($id){
-                 Pegawai::where('id',$id)->delete();
-        return redirect('/dashboard/pegawai/data')->with('alert-success','Data Berhasil');
-    }
-
-
-    // data dokter
-    function dokter(){
-        $data=Dokter::orderBy('id','desc')->get();
-        return view('admin.dokter_data',[
-            'data' => $data
-        ]);
-    }
-    function dokter_add(){
-        return view('admin.dokter_add');
-    }
-    function dokter_act(Request $request){
-            $request->validate([
-                'nama' => 'required',
-                'nip' => 'required'
-            ]);
-
-             $date=date('Y-m-d');
-
-         DB::table('dokter')->insert([
-            'nama' => $request->nama,
-            'nip' =>$request->nip,
-            'jenis_kelamin' => $request->kelamin,
-            'tanggal_lahir' => $request->tgl_lhr,
-            'tempat_lahir' => $request->tmp_lhr,
-            'alamat' => $request->alamat,
-            'telepon' => $request->no_hp,
-            'poli' => $request->poli,
-            'tanggal' =>$date,
-            'status' => 1
-        ]);
-        return redirect('/dashboard/dokter/data')->with('alert-success','Data Berhasil disimpan');
-
-    }
-    function dokter_edit($id){
-        $data=Dokter::where('id',$id)->get();
-        return view('admin.dokter_edit',[
-            'data' => $data
-        ]);
-    }
-    function dokter_update(Request $request){
-        $request->validate([
-                'nama' => 'required',
-                'nip' => 'required'
-            ]);
-            $id=$request->id;
-             $date=date('Y-m-d');
-
-         DB::table('dokter')->where('id',$id)->update([
-            'nama' => $request->nama,
-            'nip' =>$request->nip,
-            'jenis_kelamin' => $request->kelamin,
-            'tanggal_lahir' => $request->tgl_lhr,
-            'tempat_lahir' => $request->tmp_lhr,
-            'alamat' => $request->alamat,
-            'telepon' => $request->no_hp,
-            'poli' => $request->poli,
-        ]);
-        return redirect('/dashboard/dokter/data')->with('alert-success','Data Berhasil diubah');
-
-    }
-    function dokter_delete($id){
-        Dokter::where('id',$id)->delete();
-        return redirect('/dashboard/dokter/data')->with('alert-success','Data Berhasil terhapus');
-
-    }
-
-
-
-
-
-    // data poli
-
-function poli(){
-    $data=Poli::orderBy('id','desc')->get();
-        return view('admin.poli_data',[
-            'data' =>$data
-        ]);
-}
-function  poli_act(Request $request){
-       $request->validate([
-            'nama' => 'required',
-        ]);
-
-         DB::table('poli')->insert([
-            'prosedur' => $request->nama,
-        ]);
-        return redirect('/dashboard/poli/data')->with('alert-success','Data Berhasil');
+    return view('cetak.cetak_item_br',[
+        'data' =>$data
+    ]);
 
 }
-function  poli_edit($id){
-    $dpoli=Poli::where('id',$id)->get();
-       $data=Poli::orderBy('id','desc')->get();
-        return view('admin.poli_edit',[
-            'data' =>$data,
-            'poli' => $dpoli
-        ]);
-}
-function  poli_update(Request $request){
-        $request->validate([
-            'nama' => 'required',
-        ]);
-
-        $id=$request->id;
-         DB::table('poli')->where('id',$id)->update([
-            'prosedur' => $request->nama,
-        ]);
-        return redirect('/dashboard/poli/data')->with('alert-success','Data Berhasil');
+   
 
 
-}
-function  poli_delete($id){
-         Poli::where('id',$id)->delete();
-        return redirect('/dashboard/poli/data')->with('alert-success','Data Berhasil');
-       
-}
+
 
 
 // rekam medis

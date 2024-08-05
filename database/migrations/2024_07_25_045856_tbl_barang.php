@@ -21,8 +21,8 @@ return new class extends Migration
               $table->text('jumlah')->nullable();
               $table->text('lokasi')->nullable();
                $table->text('barcode')->nullable();
-               $table->text('satuan')->nullable();
                $table->date('tgl')->nullable();
+               $table->text('satuan')->nullable();
                $table->text('status')->nullable();
             });
         };

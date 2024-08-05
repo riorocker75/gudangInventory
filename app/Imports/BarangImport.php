@@ -14,6 +14,7 @@ class BarangImport implements ToModel
     */
     public function model(array $row)
     {
+        $barcode=mt_rand(100000, 999999);
         return new Barang([
             'nama' => $row[1],
             'code' => $row[2], 
@@ -21,6 +22,9 @@ class BarangImport implements ToModel
             'jual' => $row[4], 
             'jumlah' => $row[5], 
             'lokasi' => $row[6],
+            'barcode' => $barcode,
+            'tgl' => date('Y-m-d'),
+            'status' => 1,
         ]);
     }
 }
