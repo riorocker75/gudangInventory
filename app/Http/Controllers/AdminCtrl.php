@@ -287,6 +287,17 @@ public function barang_import_excell(Request $request) {
     }
 
     function barang_masuk_delete($id){
+        $trs=Transaksi::where('id',$id)->first();
+
+        $barang= Barang::where('id',$trs->barang_id)->first();
+        $barang_id=$barang->id;
+
+        $total=$barang->jumlah - $trs->jumlah;
+       
+        DB::table('barang')->where('id',$barang_id)->update([
+            'jumlah' => $total
+         ]);
+
         Transaksi::where('id',$id)->delete();
         return redirect('/dashboard/barang_masuk/data')->with('alert-danger','Data dihapus');
 
@@ -397,6 +408,17 @@ public function barang_import_excell(Request $request) {
     }
 
     function barang_keluar_delete($id){
+        $trs=Transaksi::where('id',$id)->first();
+
+        $barang= Barang::where('id',$trs->barang_id)->first();
+        $barang_id=$barang->id;
+
+        $total=$barang->jumlah +  $trs->jumlah;
+       
+        DB::table('barang')->where('id',$barang_id)->update([
+            'jumlah' => $total
+         ]);
+
         Transaksi::where('id',$id)->delete();
         return redirect('/dashboard/barang_keluar/data')->with('alert-danger','Data dihapus');
 
@@ -422,6 +444,21 @@ public function barang_import_excell(Request $request) {
     }
 
     function transaksi_delete($id){
+        $trs=Transaksi::where('id',$id)->first();
+
+        $barang= Barang::where('id',$trs->barang_id)->first();
+        $barang_id=$barang->id;
+        
+        if($trs->ket == "masuk"){
+            $total=$barang->jumlah -  $trs->jumlah;
+        }elseif($trs->ket == "keluar"){
+            $total=$barang->jumlah +  $trs->jumlah;
+        }
+       
+        DB::table('barang')->where('id',$barang_id)->update([
+            'jumlah' => $total
+         ]);
+
         Transaksi::where('id',$id)->delete();
         return redirect('/dashboard/transaksi/data')->with('alert-danger','Data dihapus');
     }

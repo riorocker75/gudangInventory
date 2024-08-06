@@ -65,7 +65,7 @@
 
 
 <footer class="main-footer">
-  <strong>Copyright &copy; <a href="">Yudha</a>.</strong>
+  <strong>Copyright &copy; <a href="">Yuda</a>.</strong>
   All rights reserved.
 </footer>
 

@@ -23,13 +23,7 @@ class User_seed extends Seeder
           'status'=> 1
         ]);
 
-        Admin::create([
-          'id' => 2,
-          'username' => "kapus",
-          'password' =>bcrypt("kapus"),
-          'level' =>2,
-          'status'=> 1
-        ]);
+        
 
         
     }
