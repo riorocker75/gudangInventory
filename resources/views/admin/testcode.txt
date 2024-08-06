@@ -4,3 +4,41 @@
 <td>Tanggal Masuk: {{format_tanggal(date('Y-m-d',strtotime($dt->tanggal)))}}
 <br>Tanggal Keluar:  {{format_tanggal(date('Y-m-d',strtotime($dt->tanggal_keluar)))}}
 </td>
+
+
+  <a href="#" class="btn btn-default" data-toggle="modal" data-target="#cetakLaporan"> <i class="fa fa-print" aria-hidden="true"></i> Cetak Laporan</a>
+
+{{-- cetak laporan --}}
+
+<div class="modal fade" id="cetakLaporan" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <form method="post" action="{{url('/dashboard/barang/cetak')}}" enctype="multipart/form-data">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Cetak Laporan</h5>
+        </div>
+        <div class="modal-body">
+
+          {{ csrf_field() }}
+
+          <label>Pilih Tanggal </label>
+          <div class="form-group">
+            <label>Dari :</label>
+                <input type="date" class="form-control" value="{{date('Y-m-d')}}" name="dari">
+            </div>
+
+            <div class="form-group">
+              <label>Sampai :</label>
+                  <input type="date" class="form-control" value="{{date('Y-m-d')}}" name="sampai">
+                     
+              </div>
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary">Cetak Laporan</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

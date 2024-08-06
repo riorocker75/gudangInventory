@@ -30,7 +30,7 @@
                   <h3 class="card-title">Data semua Barang Keluar </h3>
                   <div class="float-right">
                       <a href="{{url('/dashboard/barang_keluar/add')}}" class="btn btn-primary">Tambah Barang keluar</a>
-                      
+                      <a href="#" class="btn btn-default" data-toggle="modal" data-target="#cetakLaporanKeluar"> <i class="fa fa-print" aria-hidden="true"></i> Cetak Laporan</a>
                     </div>
                 </div>
                 <!-- /.card-header -->
@@ -94,6 +94,36 @@
 
 
 
+<div class="modal fade" id="cetakLaporanKeluar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <form method="post" action="{{url('/dashboard/barang_keluar/cetak')}}" enctype="multipart/form-data">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Cetak Laporan</h5>
+        </div>
+        <div class="modal-body">
 
+          {{ csrf_field() }}
+
+          <label>Pilih Tanggal </label>
+          <div class="form-group">
+            <label>Dari :</label>
+                <input type="date" class="form-control" value="{{date('Y-m-d')}}" name="dari">
+            </div>
+
+            <div class="form-group">
+              <label>Sampai :</label>
+                  <input type="date" class="form-control" value="{{date('Y-m-d')}}" name="sampai">
+              </div>
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary">Cetak Laporan</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
 
 @endsection

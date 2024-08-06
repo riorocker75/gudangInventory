@@ -85,8 +85,11 @@ Route::post('/ajax/kode-masuk',[AdminCtrl::class,'ajax_kode']);
 // cetak barcode
 Route::post('/dashboard/barang_detail/cetak_barcode_item', [AdminCtrl::class,'cetak_barcode_peritem']);
 
-
-
+// cetak laporan
+Route::post('/dashboard/barang/cetak', [AdminCtrl::class,'cetak_barang']);
+Route::post('/dashboard/barang_masuk/cetak', [AdminCtrl::class,'cetak_barang_masuk']);
+Route::post('/dashboard/barang_keluar/cetak', [AdminCtrl::class,'cetak_barang_keluar']);
+Route::post('/dashboard/transaksi/cetak', [AdminCtrl::class,'cetak_transaksi']);
 
 // cetak rekam kwitansi
 Route::get('/dashboard/rekam/kwitansi/{id}', [AdminCtrl::class,'cetak_kwitansi']);
