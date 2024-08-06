@@ -26,10 +26,14 @@
   </div>
     <section class="content">
         @php
-            // $jlh_pasien= App\Models\Pasien::where('status',1)->count();
-            // $jlh_rekam= App\Models\Rekam::where('status',1)->count(); 
-            // $jlh_rujuk= App\Models\Rujukan::all()->count(); 
-            // $jlh_dokter= App\Models\Dokter::all()->count();   
+       
+            $tgl=date('Y-m-d');  
+            $jlh_transaksi= App\Models\Transaksi::where('tgl',$tgl)->count();
+            $jlh_barang= App\Models\Transaksi::where('tgl',$tgl)->where('ket',"masuk")->sum('jumlah');
+            $jlh_barang_jual= App\Models\Transaksi::where('tgl',$tgl)->where('ket',"keluar")->sum('jumlah');
+            $jlh_barang_all= App\Models\Barang::sum('jumlah');
+
+
 
         @endphp
       <div class="container-fluid">
@@ -38,14 +42,14 @@
                         <!-- small box -->
                         <div class="small-box bg-info">
                         <div class="inner">
-                            {{-- <h3>{{}}</h3> --}}
+                            <h3>{{$jlh_transaksi}}</h3>
 
-                            <p>Transaksi</p>
+                            <p>Transaksi {{format_tanggal(date('Y-m-d'))}}</p>
                         </div>
                         <div class="icon">
                         <i class="fa fa-user" aria-hidden="true"></i>
                         </div>
-                        <a href="{{url('/')}}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                        <a href="{{url('/dashboard/transaksi/data')}}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                         </div>
                  </div>
 
@@ -53,14 +57,14 @@
                         <!-- small box -->
                         <div class="small-box bg-success">
                         <div class="inner">
-                            <h3></h3>
+                            <h3>{{$jlh_barang}}</h3>
 
-                            <p>Stock Barang</p>
+                            <p>Stock Barang {{format_tanggal(date('Y-m-d'))}}</p>
                         </div>
                         <div class="icon">
                         <i class="fa fa-book" aria-hidden="true"></i>
                         </div>
-                        <a href="{{url('/')}}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                        <a href="{{url('/dashboard/barang_masuk/data')}}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                         </div>
                     </div>
 
@@ -69,14 +73,14 @@
                         <!-- small box -->
                         <div class="small-box bg-primary">
                         <div class="inner">
-                            <h3></h3>
+                            <h3>{{$jlh_barang_jual}}</h3>
 
-                            <p>Barang Terjual</p>
+                            <p>Barang Terjual {{format_tanggal(date('Y-m-d'))}}</p>
                         </div>
                         <div class="icon">
                         <i class="fa fa-book" aria-hidden="true"></i>
                         </div>
-                        <a href="{{url('/dashboard/rujuk/data')}}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                        <a href="{{url('/dashboard/barang_keluar/data')}}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                         </div>
                     </div>
 
@@ -85,14 +89,14 @@
                         <!-- small box -->
                         <div class="small-box bg-warning">
                         <div class="inner">
-                            <h3></h3>
+                            <h3>{{$jlh_barang_all}}</h3>
 
                             <p>Total Barang</p>
                         </div>
                         <div class="icon">
                         <i class="fa fa-user" aria-hidden="true"></i>
                         </div>
-                        <a href="{{url('/')}}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                        <a href="{{url('/dashboard/barang/data')}}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                         </div>
                     </div>
          </div>

@@ -6,12 +6,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0">Data Barang Masuk</h1>
+            <h1 class="m-0">Data Transaksi Barang</h1>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Data Barang Masuk</li>
+              <li class="breadcrumb-item active">Data Transaksi Barang</li>
             </ol>
           </div><!-- /.col -->
         </div><!-- /.row -->
@@ -27,9 +27,10 @@
         <div class="container-fluid">
            <div class="card">
                 <div class="card-header">
-                  <h3 class="card-title">Data semua Barang Masuk </h3>
+                  <h3 class="card-title">Data Transaksi Barang </h3>
                   <div class="float-right">
-                      <a href="{{url('/dashboard/barang_masuk/add')}}" class="btn btn-primary">Tambah Barang Masuk</a>
+                      <a href="{{url('/dashboard/barang_masuk/add')}}" class="btn btn-info"><i class="fa fa-plus" aria-hidden="true"></i> Barang Masuk</a>
+                      <a href="{{url('/dashboard/barang_keluar/add')}}" class="btn btn-success"><i class="fa fa-plus" aria-hidden="true"></i> Barang Keluar</a>
                       
                     </div>
                 </div>
@@ -42,8 +43,8 @@
                       <th>Nama </th>
                       <th>Jumlah</th>
                       <th>Harga</th>
-                      <th>Lokasi</th>
-                      <th>Tanggal Masuk</th>
+                      <th>Keterangan</th>
+                      <th>Tanggal Transksi</th>
                       <th>Edit</th>
                     </tr>
                     </thead>
@@ -61,21 +62,23 @@
                              <tr>
                                   <td>{{$no++}}</td>
                                     <td>{{$barang->nama}}</td>
-                                    <td>Barang Masuk:{{$dt->jumlah}}
+                                    <td>Barang <?php if($dt->ket == "masuk"){echo "Masuk";}else{echo"Keluar";}?>:{{$dt->jumlah}}
                                       <br>Total Stock Barang: {{$barang->jumlah}}
                                     </td>
 
                                     <td>
                                         Harga Beli: Rp.{{rupiah_format($barang->beli)}} <br>
-                                        Harga Beli: Rp.Rp.{{rupiah_format($barang->jual)}}
+                                        Harga Jual: Rp.Rp.{{rupiah_format($barang->jual)}}
                                     </td>
                                    
-                                    <td>{{$barang->lokasi}}</td>
+                                    <td>         
+                                       <span class="badge badge-<?php if($dt->ket=="masuk"){echo "info";}else{echo"success";}?>">{{$dt->ket}}</span>
+                                    </td>
                                     <td> {{format_tanggal($dt->tgl)}} </td>
                                     {{-- <td>{{date_format($dt->tgl,'Y-m-d')}}</td> --}}
                                      <td>
-                                        <a href="{{url('/dashboard/barang_masuk/edit/'.$dt->id.'')}}" class="btn btn-sm btn-warning">Ubah</a>
-                                        <a href="{{url('/dashboard/barang_masuk/delete/'.$dt->id.'')}}" class="btn btn-sm btn-danger" onclick="return confirm('Apa Anda Yakin Hapus Data Ini?')">Hapus</a>
+                                        <a href="{{url('/dashboard/transaksi/detail/'.$dt->id.'')}}" class="btn btn-sm btn-default">Lihat</a>
+                                        <a href="{{url('/dashboard/transaksi/delete/'.$dt->id.'')}}" class="btn btn-sm btn-danger" onclick="return confirm('Apa Anda Yakin Hapus Data Ini?')">Hapus</a>
                                     </td>
                               </tr>
                         @endforeach

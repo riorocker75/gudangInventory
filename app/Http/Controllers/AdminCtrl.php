@@ -36,7 +36,7 @@ class AdminCtrl extends Controller
     {
         $this->middleware(function ($request, $next) {
             if(!Session::get('login-adm')){
-                return redirect('/login')->with('alert-danger','Dilarang Masuk Terlarang');
+                return redirect('/login')->with('alert-danger','Silahkan Login');
             }
             return $next($request);
         });
@@ -157,6 +157,7 @@ public function barang_import_excell(Request $request) {
         }
 
         function barang_delete($id){
+            Transaksi::where('barang_id',$id)->delete();
             Barang::where('id',$id)->delete();
                     return redirect('/dashboard/barang/data')->with('alert-success','Data Berhasil dihapus');  
         }
@@ -402,9 +403,28 @@ public function barang_import_excell(Request $request) {
     }
 
 
-   
-    
+   //transaksi 
 
+   function transaksi(){
+        $data = Transaksi::orderBy('id','desc')->get();
+        return view('admin.transaksi_data',[
+            'data' =>$data
+        ]);
+    }
+    function transaksi_detail($id){
+        $data = Transaksi::where('id',$id)->get();
+        $trs = Transaksi::where('id',$id)->first();
+        $data_barang=Barang::where('id',$trs->barang_id)->get();
+        return view('admin.transaksi_detail',[
+            'data' =>$data,
+            'data_barang' => $data_barang
+        ]);
+    }
+
+    function transaksi_delete($id){
+        Transaksi::where('id',$id)->delete();
+        return redirect('/dashboard/transaksi/data')->with('alert-danger','Data dihapus');
+    }
 // cetak barcode
 
 function cetak_barcode_peritem(Request $request){

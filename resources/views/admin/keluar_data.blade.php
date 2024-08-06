@@ -75,7 +75,7 @@
                                     {{-- <td>{{date_format($dt->tgl,'Y-m-d')}}</td> --}}
                                      <td>
                                         <a href="{{url('/dashboard/barang_keluar/edit/'.$dt->id.'')}}" class="btn btn-sm btn-warning">Ubah</a>
-                                        <a href="{{url('/dashboard/barang/delete/'.$dt->id.'')}}" class="btn btn-sm btn-danger">Hapus</a>
+                                        <a href="{{url('/dashboard/barang_keluar/delete/'.$dt->id.'')}}" class="btn btn-sm btn-danger" onclick="return confirm('Apa Anda Yakin Hapus Data Ini?')">Hapus</a>
                                     </td>
                               </tr>
                         @endforeach

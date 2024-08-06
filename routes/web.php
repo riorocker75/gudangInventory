@@ -66,6 +66,11 @@ Route::get('/dashboard/barang_keluar/edit/{id}', [AdminCtrl::class,'barang_kelua
 Route::post('/dashboard/barang_keluar/update', [AdminCtrl::class,'barang_keluar_update']);
 Route::get('/dashboard/barang_keluar/delete/{id}', [AdminCtrl::class,'barang_keluar_delete']);
 
+// transaksi barang
+Route::get('/dashboard/transaksi/data', [AdminCtrl::class,'transaksi']);
+Route::get('/dashboard/transaksi/detail/{id}', [AdminCtrl::class,'transaksi_detail']);
+Route::get('/dashboard/transaksi/delete/{id}', [AdminCtrl::class,'transaksi_delete']);
+
 // lokasi barang
 Route::get('/dashboard/lokasi/data', [AdminCtrl::class,'lokasi']);
 Route::post('/dashboard/lokasi/act', [AdminCtrl::class,'lokasi_act']);

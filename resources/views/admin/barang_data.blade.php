@@ -79,7 +79,7 @@
                                      <td>
                                       <a href="{{url('/dashboard/barang/detail/'.$dt->id.'')}}" class="btn btn-sm btn-default">Detail</a>
                                         <a href="{{url('/dashboard/barang/edit/'.$dt->id.'')}}" class="btn btn-sm btn-warning">Ubah</a>
-                                        <a href="{{url('/dashboard/barang/delete/'.$dt->id.'')}}" class="btn btn-sm btn-danger">Hapus</a>
+                                        <a href="{{url('/dashboard/barang/delete/'.$dt->id.'')}}" class="btn btn-sm btn-danger" onclick="return confirm('Apa Anda Yakin Hapus Data Ini?')">Hapus</a>
                                     </td>
                               </tr>
 
