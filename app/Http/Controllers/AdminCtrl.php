@@ -470,7 +470,7 @@ function cetak_barcode_peritem(Request $request){
     $barang=Barang::where('id',$id)->first();
     $barcode=$barang->barcode;
     $data=array();
-
+    
     for($i=0;$i<$jumlah;$i++){
        $data[]= $barcode; 
     }

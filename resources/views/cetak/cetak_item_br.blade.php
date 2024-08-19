@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Cetak barcode</title>
+    <title>Cetak QR code</title>
 {{-- databales --}}
   <link rel="stylesheet" href="{{asset('plugins/datatables-bs4/css/dataTables.bootstrap4.min.css')}}">
   <link rel="stylesheet" href="{{asset('plugins/datatables-responsive/css/responsive.bootstrap4.min.css')}}">
@@ -24,11 +24,13 @@
 
 @foreach ($data as $item)
 
-<div style="margin:5px 10px">
-    {!! DNS1D::getBarcodeSVG($item, "C39") !!}
-
+<div style="margin:10px 10px">
+    {!! DNS2D::getBarcodeSVG($item, "QRCODE") !!}
+   
 </div>
-
+    <div style="margin-top: -7px;margin-left:10px;">
+        <p style="font-size:12px!important;letter-spacing:2px">{{$item}} </p> 
+    </div>
 @endforeach
 
 

@@ -47,7 +47,7 @@
                       <th>Stock</th>
                       <th>Harga</th>
                       <th>Lokasi</th>
-                      <th>Barcode</th>
+                      <th>QR code</th>
                       <th>Edit</th>
                     </tr>
                     </thead>
@@ -74,7 +74,7 @@
                                     <td> 
                                      
                                       <button type="button" class="btn btn-default mr-5" data-toggle="modal" data-target="#cetakBarcode-{{$dt->id}}">
-                                        <i class="fa fa-print" aria-hidden="true"> Print Barcode</i> 
+                                        <i class="fa fa-print" aria-hidden="true"> Print QR code</i> 
                                        </button>
                                     </td>
                                      <td>
@@ -97,7 +97,7 @@
                 
                           {{ csrf_field() }}
                 
-                          <label>Masukan Jumlah Barcode yang ingin dicetak</label>
+                          <label>Masukan Jumlah Qr code yang ingin dicetak</label>
                           <div class="form-group">
                               <input type="hidden" class="form-control" name="id" value="{{$dt->id}}" required>
               

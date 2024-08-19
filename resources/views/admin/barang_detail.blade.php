@@ -75,11 +75,11 @@
 
                      <div class="col-md-6">
                         <div class="form-group">
-                            <label for="exampleInputEmail1">Barcode</label>
-                            {!!DNS1D::getBarcodeHTML($dt->barcode, 'C39')!!} 
+                            <label for="exampleInputEmail1">QR code</label>
+                            {!!DNS2D::getBarcodeHTML($dt->barcode, 'QRCODE')!!} 
                            <span style="letter-spacing: 0.3em">{{$dt->barcode}}</span><br> 
                           <button type="button" class="btn btn-default mr-5" data-toggle="modal" data-target="#cetakBarcode">
-                            <i class="fa fa-print" aria-hidden="true"></i> Cetak Barcode
+                            <i class="fa fa-print" aria-hidden="true"></i> Cetak QR code
                            </button>
                         </div>
                      </div>
@@ -116,7 +116,7 @@
   
             {{ csrf_field() }}
   
-            <label>Masukan Jumlah Barcode yang ingin dicetak</label>
+            <label>Masukan Jumlah QR code yang ingin dicetak</label>
             <div class="form-group">
                 <input type="hidden" class="form-control" name="id" value="{{$dt->id}}" required>
 
