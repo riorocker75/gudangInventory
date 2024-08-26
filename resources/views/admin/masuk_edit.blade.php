@@ -37,17 +37,17 @@
                                      @endphp
                           <div class="row">
                            <div class="col-md-12">
-                                   
+                            <div class="form-group">
+                              <label for="exampleInputEmail1">Jumlah Masuk</label>
+                              <input type="number" class="form-control" name="jumlah" value={{$dt->jumlah}} required>
+                          </div>
                                       <div class="form-group">
                                         <label for="exampleInputEmail1">Kode Item</label>
                                         <input type="hidden" class="form-control" name="id" id="kodeItem" value="{{$dt->id}}" required>
 
-                                        <input type="text" class="form-control" name="code" id="kodeItem" value="{{$barang->code}}" required readonly>
+                                        <input type="text" class="form-control" name="code" id="kodeItem" value="{{$barang->barcode}}" required readonly>
                                     </div>
-                                      <div class="form-group">
-                                          <label for="exampleInputEmail1">Jumlah Masuk</label>
-                                          <input type="number" class="form-control" name="jumlah" value={{$dt->jumlah}} required>
-                                      </div>
+                                    
                                       
                                      
                                      

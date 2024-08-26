@@ -33,15 +33,15 @@
                                  @method('POST')
                           <div class="row">
                            <div class="col-md-12">
-                                   
+                            <div class="form-group">
+                              <label for="exampleInputEmail1">Jumlah keluar</label>
+                              <input type="number" value="1" class="form-control" name="jumlah" required>
+                          </div>
                                       <div class="form-group">
                                         <label for="exampleInputEmail1">Kode Item</label>
                                         <input type="text" class="form-control" name="code" id="kodeItem" required>
                                     </div>
-                                      <div class="form-group">
-                                          <label for="exampleInputEmail1">Jumlah keluar</label>
-                                          <input type="number" value="1" class="form-control" name="jumlah" required>
-                                      </div>
+                                     
                                       
                                      
                                      
