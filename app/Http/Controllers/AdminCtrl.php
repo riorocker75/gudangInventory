@@ -229,6 +229,10 @@ public function barang_import_excell(Request $request) {
             'jumlah' => 'required',
          ]);
          $barang= Barang::where('barcode',$request->code)->first();
+
+         if (!$barang) {
+            return redirect()->back()->with('alert-danger', 'Barcode tIdak ditemukan');
+        }
          $barang_id=$barang->id;
 
          $total=$request->jumlah + $barang->jumlah;
@@ -264,6 +268,9 @@ public function barang_import_excell(Request $request) {
          ]);
          $id=$request->id;
          $barang= Barang::where('barcode',$request->code)->first();
+         if (!$barang) {
+            return redirect()->back()->with('alert-danger', 'Barcode tIdak ditemukan');
+        }
          $barang_id=$barang->id;
 
          $trs=Transaksi::where('id',$id)->first();
@@ -350,6 +357,9 @@ public function barang_import_excell(Request $request) {
             'jumlah' => 'required',
          ]);
          $barang= Barang::where('barcode',$request->code)->first();
+         if (!$barang) {
+            return redirect()->back()->with('alert-danger', 'Barcode tIdak ditemukan');
+        }
          $barang_id=$barang->id;
 
          $total=$barang->jumlah - $request->jumlah;
@@ -385,6 +395,9 @@ public function barang_import_excell(Request $request) {
          ]);
          $id=$request->id;
          $barang= Barang::where('barcode',$request->code)->first();
+         if (!$barang) {
+            return redirect()->back()->with('alert-danger', 'Barcode tIdak ditemukan');
+        }
          $barang_id=$barang->id;
 
          $trs=Transaksi::where('id',$id)->first();
