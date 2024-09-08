@@ -91,51 +91,9 @@ Route::post('/dashboard/barang_masuk/cetak', [AdminCtrl::class,'cetak_barang_mas
 Route::post('/dashboard/barang_keluar/cetak', [AdminCtrl::class,'cetak_barang_keluar']);
 Route::post('/dashboard/transaksi/cetak', [AdminCtrl::class,'cetak_transaksi']);
 
-// cetak rekam kwitansi
-Route::get('/dashboard/rekam/kwitansi/{id}', [AdminCtrl::class,'cetak_kwitansi']);
-
-// cetak surat rujuk
-Route::get('/dashboard/rekam/surat/{id}', [AdminCtrl::class,'cetak_rujukan']);
 
 
-// cek rujukan ajax
-Route::post('/ajax/cek_rujuk', [AdminCtrl::class,'cek_rujuk']);
-
-
-// bagian kapus
-// cetak pasien
-Route::get('/dashboard/kapus', [KapusCtrl::class,'index']);
-Route::get('/kapus/pasien', [KapusCtrl::class,'pasien']);
-Route::get('/kapus/cetak/pasien', [KapusCtrl::class,'cetak_pasien']);
-
-// pegwai
-Route::get('/kapus/pegawai', [KapusCtrl::class,'pegawai']);
-Route::get('/kapus/cetak/pegawai', [KapusCtrl::class,'cetak_pegawai']);
-
-// Dokter
-Route::get('/kapus/dokter', [KapusCtrl::class,'dokter']);
-Route::get('/kapus/cetak/dokter', [KapusCtrl::class,'cetak_dokter']);
-
-// kunjungan pasien
-Route::get('/kapus/kunjungan', [KapusCtrl::class,'kunjungan']);
-Route::get('/kapus/cetak/kunjungan', [KapusCtrl::class,'cetak_kunjungan']);
-
-
-// poli
-Route::get('/kapus/poli', [KapusCtrl::class,'poli']);
-
-// rujukan
-Route::get('/kapus/rujukan', [KapusCtrl::class,'rujukan']);
-Route::get('/kapus/cetak/rujukan', [KapusCtrl::class,'cetak_rujukan']);
-
-// profile
-Route::get('/dashboard/profile', [AdminCtrl::class,'profile']);
-Route::get('/dashboard/pelayanan', [AdminCtrl::class,'pelayanan']);
-Route::get('/dashboard/visi-misi', [AdminCtrl::class,'visimisi']);
-
-Route::get('/dashboard/struktur', [AdminCtrl::class,'struktur']);
-Route::get('/dashboard/galeri', [AdminCtrl::class,'galeri']);
-
+Route::get('/dashboard/uji/data', [AdminCtrl::class,'uji_data']);
 
 
 

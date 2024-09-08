@@ -596,81 +596,12 @@ function cetak_transaksi(Request $request){
     ]);
 }
 
-
-
-function cetak_rujukan($id){
-    $dt=Rujukan::where('id_rekam',$id)->first();
-
-    return view('cetak.surat_rujuk',[
-        'dt'=> $dt
+function uji_data(){
+    $data = Barang::orderBy('id','asc')->get();
+    return view('admin.uji_barang',[
+        'data' => $data
     ]);
 }
-
-
- function cek_rujuk(Request $request){
-    $cek_status=$request->cek_rujuk;
-
-    if($cek_status == 1){
-        echo"
-         <div class='form-group'>
-            <label >Rumah Sakit Rujukan</label>
-            <input type='text' class='form-control'  name='rs_rujuk' value='Rumah Sakit Umum Hasanuddin Kuta Cane' readonly>
-        </div>
-        <div class='form-group'>
-            <label >Tanggal surat</label>
-            <input type='date' class='form-control'  name='tgl_rujuk'>
-        </div>
-        ";
-    }else{
-        
-    }
-
- }
-
-    function cetak_rujukan_data(){
-            $year=date('Y');
-                $data=Rekam::whereYear('tanggal',$year)->get();
-                return view('cetak.cetak_rujukan',[
-                    'data'=> $data
-                ]);
-
-        }
-
-        function kunjungan(){
-        $data=Rekam::orderBy('id','asc')->get();
-        return view('admin.kunjungan',[
-            'data' =>$data
-        ]);
-    }
-        function cetak_kunjungan(){
-            $year=date('Y');
-             $data=Rekam::whereYear('tanggal',$year)->get();
-            return view('cetak.cetak_kunjungan',[
-                'data'=> $data
-            ]);
-        } 
-
-
-
- function profile(){
-    return view('admin.v_profile');
- }
-
-  function struktur(){
-    return view('admin.v_struktur');
- }
-
-   function pelayanan(){
-    return view('admin.v_pelayanan');
- }
-    function visimisi(){
-    return view('admin.v_visimisi');
- }
-
-   function galeri(){
-    return view('admin.v_galeri');
- }
-
 
  function role(){
      $data=Admin::orderBy('id','asc')->get();

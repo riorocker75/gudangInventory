@@ -48,7 +48,6 @@
                       <th>Harga</th>
                       <th>Lokasi</th>
                       <th>QR code</th>
-                      <th>Edit</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -69,20 +68,14 @@
                                   <td>{{$dt->jumlah}}</td>
                                     <td>
                                       Beli :<span class="badge badge-default">{{rupiah_format($dt->beli)}} </span><br>
-                                      Jual: <span class="badge badge-success">{{rupiah_format($dt->jual)}} </span>
+                                      Jual: <span class="badge badge-default">{{rupiah_format($dt->jual)}} </span>
                                     </td>
                                     <td>{{$lokasi->nama}}</td>
                                     <td> 
                                      
-                                      <button type="button" class="btn btn-default mr-5" data-toggle="modal" data-target="#cetakBarcode-{{$dt->id}}">
-                                        <i class="fa fa-print" aria-hidden="true"> Print QR code</i> 
-                                       </button>
+                                        {!! DNS2D::getBarcodeSVG($dt->barcode, "QRCODE") !!}
                                     </td>
-                                     <td>
-                                      <a href="{{url('/dashboard/barang/detail/'.$dt->id.'')}}" class="btn btn-sm btn-default">Detail</a>
-                                        <a href="{{url('/dashboard/barang/edit/'.$dt->id.'')}}" class="btn btn-sm btn-warning">Ubah</a>
-                                        <a href="{{url('/dashboard/barang/delete/'.$dt->id.'')}}" class="btn btn-sm btn-danger" onclick="return confirm('Apa Anda Yakin Hapus Data Ini?')">Hapus</a>
-                                    </td>
+                                    
                               </tr>
 
 
