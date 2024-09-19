@@ -68,7 +68,7 @@
 
                                     <td>
                                         Harga Beli: Rp.{{rupiah_format($barang->beli)}} <br>
-                                        Harga Beli: Rp.Rp.{{rupiah_format($barang->jual)}}
+                                        Harga Jual: Rp.Rp.{{rupiah_format($barang->jual)}}
                                     </td>
                                    
                                     <td>{{$barang->lokasi}}</td>

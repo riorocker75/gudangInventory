@@ -234,6 +234,7 @@ public function barang_import_excell(Request $request) {
             return redirect()->back()->with('alert-danger', 'Barcode tIdak ditemukan');
         }
          $barang_id=$barang->id;
+         $br_nama=$barang->nama;
 
          $total=$request->jumlah + $barang->jumlah;
          DB::table('transaksi')->insert([
@@ -247,7 +248,7 @@ public function barang_import_excell(Request $request) {
          DB::table('barang')->where('id',$barang_id)->update([
             'jumlah' => $total,
          ]);
-         return redirect('/dashboard/barang_masuk/data')->with('alert-success','Data sudah terkirim');
+         return redirect('/dashboard/barang_masuk/data')->with('alert-success','Barang '.$br_nama.' Berhasil ditambahkan ke Stok');
 
     }
 
@@ -269,9 +270,10 @@ public function barang_import_excell(Request $request) {
          $id=$request->id;
          $barang= Barang::where('barcode',$request->code)->first();
          if (!$barang) {
-            return redirect()->back()->with('alert-danger', 'Barcode tIdak ditemukan');
+            return redirect()->back()->with('alert-danger', 'Barcode tidak ditemukan');
         }
          $barang_id=$barang->id;
+         $br_nama=$barang->nama;
 
          $trs=Transaksi::where('id',$id)->first();
 
@@ -288,7 +290,7 @@ public function barang_import_excell(Request $request) {
          DB::table('barang')->where('id',$barang_id)->update([
             'jumlah' => $total
          ]);
-         return redirect('/dashboard/barang_masuk/data')->with('alert-success','Data sudah terkirim');
+         return redirect('/dashboard/barang_masuk/data')->with('alert-success','Barang '.$br_nama.' Berhasil di-ubah');
 
       
     }
@@ -306,7 +308,7 @@ public function barang_import_excell(Request $request) {
          ]);
 
         Transaksi::where('id',$id)->delete();
-        return redirect('/dashboard/barang_masuk/data')->with('alert-danger','Data dihapus');
+        return redirect('/dashboard/barang_masuk/data')->with('alert-danger','Data telah dihapus');
 
     }
 
@@ -361,6 +363,7 @@ public function barang_import_excell(Request $request) {
             return redirect()->back()->with('alert-danger', 'Barcode tIdak ditemukan');
         }
          $barang_id=$barang->id;
+         $br_nama=$barang->nama;
 
          $total=$barang->jumlah - $request->jumlah;
          DB::table('transaksi')->insert([
@@ -374,7 +377,7 @@ public function barang_import_excell(Request $request) {
          DB::table('barang')->where('id',$barang_id)->update([
             'jumlah' => $total,
          ]);
-         return redirect('/dashboard/barang_keluar/data')->with('alert-success','Data sudah terkirim');
+         return redirect('/dashboard/barang_keluar/data')->with('alert-success','Barang '.$br_nama.' Telah Keluar');
 
     }
 
@@ -399,6 +402,7 @@ public function barang_import_excell(Request $request) {
             return redirect()->back()->with('alert-danger', 'Barcode tIdak ditemukan');
         }
          $barang_id=$barang->id;
+         $br_nama=$barang->nama;
 
          $trs=Transaksi::where('id',$id)->first();
 
@@ -415,7 +419,7 @@ public function barang_import_excell(Request $request) {
          DB::table('barang')->where('id',$barang_id)->update([
             'jumlah' => $total
          ]);
-         return redirect('/dashboard/barang_keluar/data')->with('alert-success','Data sudah terkirim');
+         return redirect('/dashboard/barang_keluar/data')->with('alert-success','Data '.$br_nama.' Berhasil di-ubah');
 
       
     }
@@ -433,7 +437,7 @@ public function barang_import_excell(Request $request) {
          ]);
 
         Transaksi::where('id',$id)->delete();
-        return redirect('/dashboard/barang_keluar/data')->with('alert-danger','Data dihapus');
+        return redirect('/dashboard/barang_keluar/data')->with('alert-danger','Data telah dihapus');
 
     }
 
